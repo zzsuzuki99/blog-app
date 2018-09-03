@@ -1,13 +1,13 @@
 import React, { Component } from 'react'
 import Post from '../../components/Post'
-import './styles.css'
+// import './styles.css'
 import withNavBar from '../withNavBar'
 
 const posts = [1, 2, 2, 2, 2, 2, 2, 2]
-class HomeScreen extends Component {
+class PostDetailsScreen extends Component {
   render () {
     return (
-      <div className="Home">
+      <div className="post-details">
         {posts.map((item, index) => (
           <Post key={index} />
         ))}
@@ -16,6 +16,6 @@ class HomeScreen extends Component {
   }
 }
 
-const EnhanceHomeScreen = withNavBar(HomeScreen)
+const EnhancePostDetailsScreen = withNavBar(PostDetailsScreen)
 
-export default EnhanceHomeScreen
+export default EnhancePostDetailsScreen
