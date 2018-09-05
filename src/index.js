@@ -5,6 +5,7 @@ import Home from '../src/scenes/Home'
 import App from './App'
 import PostDetails from '../src/scenes/PostDetails'
 import registerServiceWorker from './registerServiceWorker'
+import CreateOrEditPostScreen from './scenes/CreateOrEditPost'
 
-ReactDOM.render(<PostDetails />, document.getElementById('root'))
+ReactDOM.render(<CreateOrEditPostScreen />, document.getElementById('root'))
 registerServiceWorker()

@@ -14,7 +14,9 @@ class App extends Component {
         <p className="App-intro">
           To get started, edit <code>src/App.js</code> and save to reload.
         </p>
-        <Button bsStyle="danger">Hello World Danger</Button>
+        <Button bsStyle="danger" onClick={() => console.log('Click')}>
+          Hello World Danger
+        </Button>
         <Button bsStyle="primary">Hello World Primary</Button>
         <Button bsStyle="success">Hello World Success</Button>
         <div className="container-button">
