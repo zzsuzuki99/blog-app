@@ -1,6 +1,7 @@
 import React, { Component } from 'react'
 // import { Navbar, Nav, MenuItem, NavDropdown, NavItem } from 'react-bootstrap'
 import './styles.css'
+import { Link } from 'react-router-dom'
 
 class NavBar extends Component {
   render () {
@@ -114,9 +115,11 @@ class NavBar extends Component {
                     id="menu-item-1813"
                     className="menu-item menu-item-type-post_type menu-item-object-page menu-item-1813"
                   >
-                    <a title="Shop" href="">
-                      Shop
-                    </a>
+                    <Link to={'./create-post'}>
+                      <a title="Shop" href="/create-post">
+                        Shop
+                      </a>
+                    </Link>
                   </li>
                 </ul>
               </div>
