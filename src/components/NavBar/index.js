@@ -29,9 +29,11 @@ class NavBar extends Component {
                     id="menu-item-1696"
                     className="menu-item menu-item-type-custom menu-item-object-custom current-menu-item current_page_item menu-item-home menu-item-1696 active"
                   >
-                    <a title="Home" href="https://colorlib.com/activello/">
-                      Home
-                    </a>
+                    <Link to={'./home'}>
+                      <a title="Home" href="">
+                        Home
+                      </a>
+                    </Link>
                   </li>
                   <li
                     id="menu-item-1639"

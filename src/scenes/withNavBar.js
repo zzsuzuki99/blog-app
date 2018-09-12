@@ -5,7 +5,7 @@ const withNavBar = WrappedComponent => {
     return (
       <div>
         <NavBar />
-        <WrappedComponent />
+        <WrappedComponent {...props} />
       </div>
     )
   }

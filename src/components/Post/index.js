@@ -1,5 +1,6 @@
 import React, { Component } from 'react'
 import './styles.css'
+import { Link } from 'react-router-dom'
 
 class Post extends Component {
   render () {
@@ -8,21 +9,21 @@ class Post extends Component {
         <header className="entry-header page-header">
           <ul className="single-category">
             <li className="cat-item cat-item-38">
-              <a href="" title="Posts in this category test post formats.">
+              <a title="Posts in this category test post formats.">
                 Post Formats
               </a>
             </li>
           </ul>
           <h2 className="entry-title">
-            <a href="" rel="bookmark">
-              Post Format: Gallery
-            </a>
+            <Link to={'./post-details'}>
+              <a rel="bookmark">Post Format: Gallery</a>
+            </Link>
           </h2>
 
           <div className="entry-meta">
             <span className="posted-on">
               Posted on
-              <a href="" rel="bookmark">
+              <a rel="bookmark">
                 <time
                   className="entry-date published"
                   dateTime="2015-11-12T07:24:14+00:00"
@@ -36,14 +37,12 @@ class Post extends Component {
             </span>
             by
             <span className="author vcard">
-              <a className="url fn n" href="">
-                Aigars
-              </a>
+              <a className="url fn n">Aigars</a>
             </span>
           </div>
         </header>
 
-        <a href="" title="Post Format: Gallery">
+        <a title="Post Format: Gallery">
           <img
             width="710"
             height="335"
@@ -63,9 +62,7 @@ class Post extends Component {
           </p>
 
           <div className="read-more">
-            <a href="" title="Post Format: Gallery">
-              Read More
-            </a>
+            <a title="Post Format: Gallery">Read More</a>
           </div>
         </div>
       </div>

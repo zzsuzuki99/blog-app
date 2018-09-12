@@ -2,13 +2,14 @@ import React, { Component } from 'react'
 import Post from '../../components/Post'
 import './styles.css'
 import withNavBar from '../withNavBar'
-
+import { connect } from 'react-redux'
 const posts = [1, 2, 2, 2, 2, 2, 2, 2]
 class HomeScreen extends Component {
   render () {
+    console.log('Post>>>', this.props.posts)
     return (
       <div className="Home">
-        {posts.map((item, index) => (
+        {this.props.posts.map((item, index) => (
           <Post key={index} />
         ))}
       </div>
@@ -18,4 +19,8 @@ class HomeScreen extends Component {
 
 const EnhanceHomeScreen = withNavBar(HomeScreen)
 
-export default EnhanceHomeScreen
+const mapStateToProps = state => ({
+  posts: state.posts
+})
+
+export default connect(mapStateToProps)(EnhanceHomeScreen)
