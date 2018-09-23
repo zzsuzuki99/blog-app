@@ -10,9 +10,9 @@ class App extends Component {
     return (
       <div>
         <Switch>
-          <Route exact path="/home" component={HomeScreen} />
+          <Route exact path="/" component={HomeScreen} />
           <Route path="/create-post" component={CreateOrEditPostScreen} />
-          <Route path="/post-details" component={PostDetailsScreen} />
+          <Route path="/post-details/:postId" component={PostDetailsScreen} />
         </Switch>
       </div>
     )

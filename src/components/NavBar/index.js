@@ -29,7 +29,7 @@ class NavBar extends Component {
                     id="menu-item-1696"
                     className="menu-item menu-item-type-custom menu-item-object-custom current-menu-item current_page_item menu-item-home menu-item-1696 active"
                   >
-                    <Link to={'./home'}>
+                    <Link to={'./'}>
                       <a title="Home" href="">
                         Home
                       </a>
