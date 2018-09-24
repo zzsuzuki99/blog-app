@@ -24,7 +24,6 @@ class TextEditor extends Component {
 
   onUnderClick = () => {
     // this.textInput.contentDocument.execCommand('Underline')
-    console.log('document>>>', this.textInput.contentDocument.body.innerHTML)
     this.setState({
       document: this.textInput.contentDocument.body.innerHTML
     })

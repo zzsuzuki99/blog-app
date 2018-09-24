@@ -1,5 +1,5 @@
-export const getPostById = (state, id) => {
-  const posts = state.posts
+export const selectPostById = (state, id) => {
+  const posts = selectAllPost(state)
   if (posts) {
     const post = posts.find(post => post.id === id)
     return post
@@ -7,7 +7,7 @@ export const getPostById = (state, id) => {
   return null
 }
 
-export const getPosts = (state, id) => {
-  const posts = state.posts
-  return posts
+export const selectAllPost = (state, id) => {
+  const posts = state.common.posts
+  return posts || []
 }

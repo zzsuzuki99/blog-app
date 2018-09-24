@@ -1,9 +1,8 @@
 import React, { Component } from 'react'
 import './styles.css'
-import { Link } from 'react-router-dom'
+import { Redirect } from 'react-router-dom'
 
 const Post = props => {
-  console.log('id>>>', props.postId)
   return (
     <div className="post-inner-content">
       <header className="entry-header page-header">
@@ -15,9 +14,9 @@ const Post = props => {
           </li>
         </ul>
         <h2 className="entry-title">
-          <Link to={`./post-details/${props.postId}`}>
-            <a rel="bookmark">Post Format: Gallery</a>
-          </Link>
+          <a rel="bookmark" href={`/post-details/${props.postId}`}>
+            Post Format: Gallery
+          </a>
         </h2>
 
         <div className="entry-meta">

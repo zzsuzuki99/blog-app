@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 // import { Navbar, Nav, MenuItem, NavDropdown, NavItem } from 'react-bootstrap'
 import './styles.css'
-import { Link } from 'react-router-dom'
+import { Redirect } from 'react-router-dom'
 
 class NavBar extends Component {
   render () {
@@ -29,11 +29,9 @@ class NavBar extends Component {
                     id="menu-item-1696"
                     className="menu-item menu-item-type-custom menu-item-object-custom current-menu-item current_page_item menu-item-home menu-item-1696 active"
                   >
-                    <Link to={'./'}>
-                      <a title="Home" href="">
-                        Home
-                      </a>
-                    </Link>
+                    <a title="Home" href="/">
+                      Home
+                    </a>
                   </li>
                   <li
                     id="menu-item-1639"
@@ -117,11 +115,9 @@ class NavBar extends Component {
                     id="menu-item-1813"
                     className="menu-item menu-item-type-post_type menu-item-object-page menu-item-1813"
                   >
-                    <Link to={'./create-post'}>
-                      <a title="Shop" href="/create-post">
-                        Shop
-                      </a>
-                    </Link>
+                    <a title="Shop" href="/create-post">
+                      Shop
+                    </a>
                   </li>
                 </ul>
               </div>

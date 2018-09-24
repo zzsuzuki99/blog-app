@@ -1,22 +1,23 @@
 import React, { Component } from 'react'
 // import './styles.css'
 import withNavBar from '../withNavBar'
-import { getPosts } from '../../selector/post'
+import { selectAllPost } from '../../selector/post'
 import { connect } from 'react-redux'
 
 class PostDetailsScreen extends Component {
   componentDidMount () {
     const currentPost = this.getPostById(this.props.match.params.postId)
     if (currentPost) {
-      this.container.innerHTML = currentPost.content.content
+      this.container.innerHTML = currentPost.content
     }
   }
 
   getPostById (id) {
     if (this.props.posts) {
-      const post = this.props.posts.find(post => post.id === id)
-      console.log('data>>>', post, id)
-      return this.props.posts[0]
+      const post = this.props.posts.find(post => {
+        return post.id === id
+      })
+      return post
     }
     return null
   }
@@ -28,7 +29,7 @@ class PostDetailsScreen extends Component {
 
 const EnhancePostDetailsScreen = withNavBar(PostDetailsScreen)
 const mapStateToProps = state => ({
-  posts: getPosts(state)
+  posts: selectAllPost(state)
 })
 
 export default connect(mapStateToProps)(EnhancePostDetailsScreen)
