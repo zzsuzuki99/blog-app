@@ -7,3 +7,14 @@ export const getPostsRequest = () => {
     method: 'get'
   }
 }
+
+export const addPostsRequest = post => {
+  return {
+    url: postApiUrl,
+    method: 'post',
+    data: {
+      content: post.content,
+      title: 'title'
+    }
+  }
+}

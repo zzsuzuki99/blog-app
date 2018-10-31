@@ -4,7 +4,6 @@ const withNavBar = WrappedComponent => {
   const screen = props => {
     return (
       <div>
-        <NavBar />
         <WrappedComponent {...props} />
       </div>
     )

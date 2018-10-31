@@ -16,7 +16,7 @@ class HomeScreen extends Component {
     return (
       <div className="container">
         {this.props.posts.map((item, index) => (
-          <Post key={index} postId={item.id} />
+          <Post key={item.id} post={item} />
         ))}
       </div>
     )

@@ -1,4 +1,7 @@
-import { ADD_POST, GET_POSTS_SUCCESSFULLY } from '../../actions/types'
+import {
+  GET_POSTS_SUCCESSFULLY,
+  ADD_POST_SUCCESSFULLY
+} from '../../actions/types'
 
 const initialState = {
   posts: []
@@ -6,7 +9,7 @@ const initialState = {
 
 export default function (state = initialState, action) {
   switch (action.type) {
-    case ADD_POST:
+    case ADD_POST_SUCCESSFULLY:
       return {
         ...state,
         posts: state.posts.push({

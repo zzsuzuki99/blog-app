@@ -5,10 +5,11 @@ import {
   GET_POSTS_SUCCESSFULLY
 } from '../types'
 
-export const addPost = post => ({
+export const addPost = (post, callback) => ({
   type: ADD_POST,
   payload: {
-    post
+    post,
+    callback
   }
 })
 

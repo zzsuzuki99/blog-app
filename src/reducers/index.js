@@ -1,7 +1,9 @@
 import { combineReducers } from 'redux'
 import common from './common'
+import ui from './ui'
 const rootReducer = combineReducers({
-  common
+  common,
+  ui
 })
 
 export default rootReducer

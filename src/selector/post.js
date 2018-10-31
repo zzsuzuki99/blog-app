@@ -9,5 +9,6 @@ export const selectPostById = (state, id) => {
 
 export const selectAllPost = (state, id) => {
   const posts = state.common.posts
+  console.log('posts>>>', posts)
   return posts || []
 }
