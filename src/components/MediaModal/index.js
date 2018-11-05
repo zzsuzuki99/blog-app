@@ -5,7 +5,8 @@ import './styles.css'
 import { uploadFile, getAllMedia } from '../../actions/creators/media'
 import { bindActionCreators } from 'redux'
 import { connect } from 'react-redux'
-
+import MediaItem from './MediaItem'
+import _ from 'lodash'
 class MediaModalComponent extends Component {
   constructor (props, context) {
     super(props, context)
@@ -14,12 +15,19 @@ class MediaModalComponent extends Component {
     // this.handleClose = this.handleClose.bind(this)
 
     this.state = {
-      show: false
+      show: false,
+      selectedIndex: -1
     }
   }
 
   componentDidMount () {
-    this.props.getAllMedia()
+    // this.props.getAllMedia()
+  }
+
+  componentDidUpdate (prevProps) {
+    if (this.props.isShow !== prevProps.isShow) {
+      this.props.getAllMedia()
+    }
   }
 
   onUploadFilePress = () => {
@@ -31,7 +39,6 @@ class MediaModalComponent extends Component {
   }
 
   render () {
-    console.log('Files>>>', this.props.files)
     // const popover = (
     //   <Popover id="modal-popover" title="popover">
     //     very popover. such engagement
@@ -58,7 +65,21 @@ class MediaModalComponent extends Component {
             >
               Upload File
             </button>
-            <div className="list-media" />
+            <div className="list-media">
+              {this.props.files &&
+                _.map(this.props.files, (file, index) => (
+                  <MediaItem
+                    url={file.url}
+                    index={index}
+                    isSelected={this.state.selectedIndex === index}
+                    onItemClick={index => {
+                      this.setState({
+                        selectedIndex: index
+                      })
+                    }}
+                  />
+                ))}
+            </div>
             <input
               id="myInput"
               type="file"
@@ -69,6 +90,19 @@ class MediaModalComponent extends Component {
           </div>
         </Modal.Body>
         <Modal.Footer>
+          <Button
+            disabled={this.state.selectedIndex === -1}
+            onClick={() => {
+              typeof this.props.onInsertToPost === 'function' &&
+                this.props.onInsertToPost(
+                  this.props.files[this.state.selectedIndex]
+                )
+              typeof this.props.handleClose === 'function' &&
+                this.props.handleClose()
+            }}
+          >
+            Insert to Post
+          </Button>
           <Button onClick={this.props.handleClose}>Close</Button>
         </Modal.Footer>
       </Modal>
@@ -82,7 +116,8 @@ MediaModalComponent.propTypes = {
   onUploadFilePress: PropTypes.func,
   uploadFile: PropTypes.func,
   files: PropTypes.array,
-  getAllMedia: PropTypes.func
+  getAllMedia: PropTypes.func,
+  onInsertToPost: PropTypes.func
 }
 
 const mapStateToProps = state => ({

@@ -1,5 +1,4 @@
 import React, { Component } from 'react'
-import { convertToRaw } from 'draft-js'
 import draftToHtml from 'draftjs-to-html'
 import { Editor } from 'react-draft-wysiwyg'
 import 'react-draft-wysiwyg/dist/react-draft-wysiwyg.css'
@@ -9,15 +8,22 @@ import { addPost } from '../../actions/creators/posts'
 import { withRouter } from 'react-router-dom'
 import PropTypes from 'prop-types'
 import './styles.css'
-import FormData from 'form-data'
 import MediaModalComponent from '../../components/MediaModal'
+import {
+  EditorState,
+  // ContentState,
+  // convertFromHTML,
+  convertToRaw
+} from 'draft-js'
+import { stateFromHTML } from 'draft-js-import-html'
 
 class CreateOrEditPostScreen extends Component {
   constructor (props) {
     super(props)
     this.onEditorStateChange = this.onEditorStateChange.bind(this)
     this.state = {
-      editorState: null
+      editorState: null,
+      htmlContent: ''
     }
   }
 
@@ -27,26 +33,32 @@ class CreateOrEditPostScreen extends Component {
     })
   }
 
-  uploadImageCallBack (file) {
-    return new Promise((resolve, reject) => {
-      const xhr = new XMLHttpRequest()
-      xhr.open('POST', 'https://api.imgur.com/3/image')
-      xhr.setRequestHeader('Authorization', 'Client-ID 8d26ccd12712fca')
-      const data = new FormData()
-      data.append('image', file)
-      xhr.send(data)
-      xhr.addEventListener('load', () => {
-        const response = JSON.parse(xhr.responseText)
-        resolve(response)
-      })
-      xhr.addEventListener('error', () => {
-        const error = JSON.parse(xhr.responseText)
-        reject(error)
-      })
-    })
+  // uploadImageCallBack (file) {
+  //   return new Promise((resolve, reject) => {
+  //     const xhr = new XMLHttpRequest()
+  //     xhr.open('POST', 'https://api.imgur.com/3/image')
+  //     xhr.setRequestHeader('Authorization', 'Client-ID 8d26ccd12712fca')
+  //     const data = new FormData()
+  //     data.append('image', file)
+  //     xhr.send(data)
+  //     xhr.addEventListener('load', () => {
+  //       const response = JSON.parse(xhr.responseText)
+  //       resolve(response)
+  //     })
+  //     xhr.addEventListener('error', () => {
+  //       const error = JSON.parse(xhr.responseText)
+  //       reject(error)
+  //     })
+  //   })
+  // }
+
+  convertToEditorState (htmlContent) {
+    var contentState = stateFromHTML(htmlContent)
+    return EditorState.createWithContent(contentState)
   }
 
   render () {
+    console.log('HTML>>>', this.state.htmlContent)
     return (
       <div className="container" style={{ marginTop: 32 }}>
         <p>Tiêu đề</p>
@@ -64,17 +76,12 @@ class CreateOrEditPostScreen extends Component {
           Add Media
         </button>
         <Editor
+          editorState={this.convertToEditorState(this.state.htmlContent)}
           toolbarClassName="toolbarClassName"
           wrapperClassName="wrapper-view"
           editorClassName="editor-view"
           onEditorStateChange={this.onEditorStateChange}
           placeholder="Begin typing..."
-          toolbar={{
-            image: {
-              uploadCallback: this.uploadImageCallBack.bind(this),
-              alt: { present: true, mandatory: true }
-            }
-          }}
         />
         <button
           style={{ marginTop: 16 }}
@@ -91,6 +98,23 @@ class CreateOrEditPostScreen extends Component {
           handleClose={() => {
             this.setState({
               isShowMediaModal: false
+            })
+          }}
+          onInsertToPost={image => {
+            console.log('image>>>', image)
+            const addImageToHtml =
+              this.state.htmlContent +
+              `<img
+            style={{
+              width: '150px',
+              height: '150px',
+              borderStyle: 'solid',
+              borderWidth: this.props.isSelected ? '5px' : '0px'
+            }}
+            src="http://blog-app.ca-central-1.elasticbeanstalk.com/api/file/file-1541306268344.jpg"
+          />`
+            this.setState({
+              htmlContent: addImageToHtml
             })
           }}
         />

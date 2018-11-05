@@ -1,10 +1,14 @@
 import {
   ADD_POST,
   GET_POSTS_SUCCESSFULLY,
-  GET_ALL_MEDIA_SUCCESSFULLY
+  GET_ALL_MEDIA_SUCCESSFULLY,
+  UPLOAD_FILE_SUCCESSFULLY
 } from '../../actions/types'
 import handlePost from './posts'
-const initialState = {}
+import _ from 'lodash'
+const initialState = {
+  files: []
+}
 
 export default function (state = initialState, action) {
   switch (action.type) {
@@ -15,6 +19,15 @@ export default function (state = initialState, action) {
       return {
         ...state,
         files: action.payload.files
+      }
+    }
+    case UPLOAD_FILE_SUCCESSFULLY: {
+      var tempFiles = _.map(state.files, _.clone)
+      tempFiles.push({ url: action.payload.url })
+      console.log('State>>>', state)
+      return {
+        ...state,
+        files: tempFiles
       }
     }
     default:
